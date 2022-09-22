@@ -9,6 +9,7 @@
 sudo kubeadm init \
     --pod-network-cidr=10.10.0.0/16 \
     --kubernetes-version=v1.23.3 \
+    --apiserver-advertise-address=192.168.56.101
     --v=5
 
 # enable kubectl
