@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-cm
+data:
+  wp.conf: |
+    server {
+    	  listen 80;
+    	  default_type text/html;
+
+    	  location / {
+              proxy_http_version 1.1;
+    	      proxy_set_header Host $host;
+    	      proxy_pass http://172.17.0.7:80;
+    	  }
+    }
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wp-nginx-cm-pod
+  labels:
+    app: nginx
+spec:
+  volumes:
+    - name: ngx-cm
+      configMap:
+        name: nginx-cm
+  containers:
+    - image: nginx:alpine
+      name: wp-nginx
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: ngx-cm
+      ports:
+        - containerPort: 80
+

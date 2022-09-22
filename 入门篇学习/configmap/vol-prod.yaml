@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: vol-prod
+
+spec:
+  volumes:
+    - name: cm-vol
+      configMap: 
+        name: info
+    - name: sec-vol
+      secret:
+        secretName: user
+  containers: 
+    - image: busybox:latest
+      name: busy-vol-prod
+      imagePullPolicy: IfNotPresent
+      command: ["/bin/sleep","300"]
+      volumeMounts: 
+       - mountPath: /tmp/cm-items
+         name: cm-vol
+       - mountPath: /tmp/sec-items
+         name: sec-vol
