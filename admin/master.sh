@@ -29,7 +29,7 @@ kubectl get node
 # kubeadm token create --print-join-command
 # openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
 
-kubeadm join 192.168.56.101:6443 --token ggwv5n.3n6ki6bixlikmju0 \
+kubeadm join master:6443 --token ggwv5n.3n6ki6bixlikmju0 \
 	--discovery-token-ca-cert-hash sha256:ea1e4f698a88602d2c509721c4deb1ad1f6e4940393739af84e54155eb7f7bce
 
 
