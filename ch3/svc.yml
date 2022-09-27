@@ -20,5 +20,5 @@ spec:
     protocol: TCP
     targetPort: 80
 
-  #type: ClusterIP
-  type: NodePort
+  type: ClusterIP
+  #type: NodePort
