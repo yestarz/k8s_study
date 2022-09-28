@@ -5,7 +5,7 @@
 # use ali registry to speed up
 repo=registry.aliyuncs.com/google_containers
 
-for name in `kubeadm config images list --kubernetes-version v1.23.3`
+for name in `kubeadm config images list --kubernetes-version v1.23.3`;
 do
 
     # remove prefix
