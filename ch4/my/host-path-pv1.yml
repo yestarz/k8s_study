@@ -60,7 +60,7 @@ metadata:
 spec:
 
   volumes:
-    - name: host-pvc-vol
+    - name: host-pvc-vol1
       persistentVolumeClaim:
         claimName: host-5m-pvc1
 
