@@ -23,7 +23,7 @@ kubectl apply -f class.yaml
 #   /ifs/kubernetes => /tmp/nfs
 sed 's/default/kube-system/g' deployment.yaml | \
   sed 's/k8s.gcr.io\/sig-storage/chronolaw/g' | \
-  sed 's/10.3.243.101/192.168.10.208/g' | \
+  sed 's/10.3.243.101/192.168.56.106/g' | \
   sed 's/\/ifs\/kubernetes/\/tmp\/nfs/g' | \
   kubectl apply -f -
 
