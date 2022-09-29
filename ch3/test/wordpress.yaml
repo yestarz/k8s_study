@@ -18,9 +18,9 @@ metadata:
 
 spec:
   replicas: 2
-    selector:
-      matchLabels:
-        app: ch3-wordpress-dep
+  selector:
+    matchLabels:
+      app: ch3-wordpress-dep
   template:
     metadata:
       labels:
