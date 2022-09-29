@@ -33,6 +33,7 @@ spec:
       containers:
         - image: mariadb:10
           name: mariadb10
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3306
           envFrom:
