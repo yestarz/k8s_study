@@ -16,7 +16,7 @@ metadata:
   name: host-10m-pv1
 
 spec:
-  storageClassName: host-test
+  storageClassName: host-test-1
 
   accessModes:
   - ReadWriteOnce
