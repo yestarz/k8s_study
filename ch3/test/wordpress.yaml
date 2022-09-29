@@ -34,7 +34,7 @@ spec:
           envFrom:
             - prefix: 'WORDPRESS_DB_'
               configMapRef:
-                name: ch3-wordpress-conf-vol
+                name: ch3-wordpress-cm
 ---
 apiVersion: v1
 kind: Service
