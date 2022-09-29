@@ -16,13 +16,63 @@ metadata:
   name: host-10m-pv1
 
 spec:
-  storageClassName: host-test-1
+  storageClassName: host-test1
 
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   capacity:
     storage: 10Mi
 
   # mkdir -p /tmp/host-10m-pv/
   hostPath:
     path: /tmp/host-10m-pv1/
+
+---
+
+# pvc
+# try to find the most suitable pv
+# capacity/accessModes
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+metadata:
+  name: host-5m-pvc1
+
+spec:
+
+  storageClassName: host-test1
+
+  accessModes:
+    - ReadWriteOnce
+
+  resources:
+    requests:
+      storage: 5Mi
+
+---
+
+# pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: host-pvc-pod1
+
+spec:
+
+  volumes:
+    - name: host-pvc-vol
+      persistentVolumeClaim:
+        claimName: host-5m-pvc1
+
+  containers:
+    - name: ngx-pvc-pod1
+      image: nginx:alpine
+      ports:
+        - containerPort: 80
+
+      volumeMounts:
+        - name: host-pvc-vol1
+          mountPath: /tmp
+
+---
+
