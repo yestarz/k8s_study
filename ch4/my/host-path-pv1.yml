@@ -13,7 +13,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: host-10m-pv
+  name: host-10m-pv1
 
 spec:
   storageClassName: host-test
