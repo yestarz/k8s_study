@@ -4,8 +4,8 @@ metadata:
   name: ch3-wordpress-cm
 
 data:
-  #HOST: 'ch3-mariadb-svc'
-  HOST: '10.109.183.0'
+  HOST: 'ch3-mariadb-svc'
+  #HOST: '10.109.183.0'
   USER: 'wp'
   PASSWORD: '123'
   NAME: 'db'
