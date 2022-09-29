@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ch3-wordpress-cm
+
+data:
+  HOST: 'ch3-mariadb-svc'
+  USER: 'wp'
+  PASSWORD: '123'
+  NAME: 'db'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ch3-wordpress-dep
+  labels:
+    app: ch3-wordpress-dep
+
+spec:
+  replicas: 2
+    selector:
+      matchLabels:
+        app: ch3-wordpress-dep
+  template:
+    metadata:
+      labels:
+        app: ch3-wordpress-dep
+    spec:
+      volumes:
+        - name: ch3-wordpress-conf-vol
+          configMap:
+            name: ch3-wordpress-cm
+      containers:
+        - image: wordpress:5
+          name: wordpress5
+          ports:
+            - containerPort: 80
+          envFrom:
+            - prefix: 'WORDPRESS_DB_'
+              configMapRef:
+                name: ch3-wordpress-conf-vol
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ch3-wordpress-svc
+
+spec:
+  selector:
+    app: ch3-wordpress-dep
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+      nodePort: 30088
+  type: NodePort

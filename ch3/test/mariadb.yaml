@@ -1,0 +1,54 @@
+apiVersion: v1
+metadata:
+  name: ch3-mariadb-cm
+data:
+  DATABASE: 'db'
+  USER: 'wp'
+  PASSWORD: '123'
+  ROOT_PASSWORD: '123'
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ch3-mariadb-dep
+  labels:
+    app: ch3-mariadb-dep
+
+spec:
+  replicas: 1
+    selector:
+      matchLabels:
+        app: ch3-mariadb-dep
+  template:
+    metadata:
+      labels:
+        app: ch3-mariadb-dep
+    spec:
+      volumes:
+        - name: ch3-mariadb-conf-vol
+          configMap:
+            name: ch3-mariadb-cm
+      containers:
+        - image: mariadb:10
+          name: mariadb10
+          ports:
+            - containerPort: 3306
+          envFrom:
+            - prefix: 'MARIADB_'
+              configMapRef:
+                name: ch3-mariadb-conf-vol
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ch3-mariadb-svc
+
+spec:
+  selector:
+    app: ch3-mariadb-dep
+  ports:
+    - port: 3306
+      protocol: TCP
+      targetPort: 3306
