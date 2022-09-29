@@ -26,10 +26,6 @@ spec:
       labels:
         app: ch3-wordpress-dep
     spec:
-      volumes:
-        - name: ch3-wordpress-conf-vol
-          configMap:
-            name: ch3-wordpress-cm
       containers:
         - image: wordpress:5
           name: wordpress5

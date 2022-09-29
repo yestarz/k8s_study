@@ -26,10 +26,6 @@ spec:
       labels:
         app: ch3-mariadb-dep
     spec:
-      volumes:
-        - name: ch3-mariadb-conf-vol
-          configMap:
-            name: ch3-mariadb-cm
       containers:
         - image: mariadb:10
           name: mariadb10
@@ -39,7 +35,7 @@ spec:
           envFrom:
             - prefix: 'MARIADB_'
               configMapRef:
-                name: ch3-mariadb-conf-vol
+                name: ch3-mariadb-cm
 
 ---
 apiVersion: v1
